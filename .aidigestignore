@@ -1,23 +1,11 @@
-node_modules
+# Ignore everything by default
+*
+.*
 
-# Output
-.output
-.vercel
-/.svelte-kit
-/build
-/bun.lockb
-# OS
-.DS_Store
-Thumbs.db
+# Don't ignore src directory and its contents
+!src/
+!src/**/*
 
-# Env
-.env
-.env.*
-!.env.example
-!.env.test
-
-# Vite
-vite.config.js.timestamp-*
-vite.config.ts.timestamp-*
-pnpm-lock.yaml
-.idea
+# Still ignore node_modules even if in src (just in case)
+src/node_modules/
+src/node_modules/**/*
