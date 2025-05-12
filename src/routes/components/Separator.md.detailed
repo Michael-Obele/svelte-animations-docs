@@ -1,0 +1,94 @@
+# Separator Component - Detailed Documentation
+
+## Overview
+
+The Separator component is a simple yet essential UI element that creates a horizontal rule (line) to visually separate content sections. It provides a consistent way to divide different areas of a page or sections within a component, enhancing readability and visual organization throughout the documentation.
+
+## API Reference
+
+### Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `class` | `string` | `""` | Additional CSS classes to apply to the separator element |
+
+### Slots
+
+The Separator component does not accept any slots as it is a self-contained visual element.
+
+## Usage Examples
+
+### Basic Separator
+
+```svelte
+<Separator />
+```
+
+### With Custom Styling
+
+```svelte
+<Separator class="my-8 border-red-300" />
+```
+
+### In Context
+
+```svelte
+<h2>Section Title</h2>
+<Separator />
+<p>Section content begins here...</p>
+```
+
+### Between Components
+
+```svelte
+<ComponentA />
+<Separator class="my-6" />
+<ComponentB />
+```
+
+## Implementation Details
+
+The Separator component is implemented as a simple horizontal rule (`<hr>`) element with Tailwind CSS classes for styling. The component uses class merging to combine default styles with any custom classes provided through the `class` prop.
+
+```svelte
+<hr class="my-4 border-t border-neutral-200 dark:border-neutral-700 {class}" />
+```
+
+## Styling
+
+The separator uses these base styles:
+
+- `my-4`: Default vertical margin spacing (1rem top and bottom)
+- `border-t`: Top border only (standard horizontal rule appearance)
+- `border-neutral-200`: Light gray color in light mode
+- `dark:border-neutral-700`: Darker gray color in dark mode
+
+These styles create a subtle horizontal line that provides visual separation without drawing excessive attention to itself.
+
+## Accessibility Considerations
+
+- The `<hr>` element has semantic meaning as a "thematic break" in HTML
+- Screen readers will announce the presence of a separator/divider
+- The component maintains proper spacing to ensure visual separation is clear
+- Color contrast is maintained between the separator and background in both light and dark modes
+- Avoid using decorative separators that might be confused with interactive elements
+
+## Best Practices
+
+1. **Consistent Spacing** - Maintain consistent margin around separators throughout the application
+2. **Semantic Usage** - Use separators to divide genuinely different content sections, not just for decoration
+3. **Visual Subtlety** - Separators should guide the eye without demanding attention
+4. **Responsive Considerations** - Ensure separators maintain their effectiveness at all viewport sizes
+5. **Limit Frequency** - Too many separators can fragment the layout; use judiciously
+
+## Related Components
+
+- **Divider** - A more complex separator that may include text or icons within the line
+- **Spacer** - Provides vertical or horizontal space without a visible line
+- **Section** - Higher-level component that may use separators internally
+- **Card** - Often contains separators between header, body, and footer
+- **Tabs** - May use separators below the tab list
+
+## Browser Support
+
+The Separator component uses the standard HTML `<hr>` element with basic CSS properties, ensuring consistent rendering across all modern browsers. The styling adapts appropriately for dark mode when supported by the browser.

@@ -1,0 +1,137 @@
+# ComponentView Component - Detailed Documentation
+
+## Overview
+
+The ComponentView component provides a standardized container for displaying live component previews in documentation. It creates a consistent visual environment for showcasing UI components with optional background patterns, proper spacing, and consistent styling across the documentation site.
+
+## API Reference
+
+### Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `class` | `string` | `""` | Additional CSS classes to apply to the component preview container |
+| `isgrid` | `boolean` | `false` | Enables a grid pattern background with linear gradient masking |
+| `isgridCenter` | `boolean` | `false` | Enables a centered radial grid pattern background |
+
+### Slots
+
+| Slot | Description |
+|------|-------------|
+| default (unnamed) | Content to display inside the preview container, typically a component or example |
+
+## Usage Examples
+
+### Basic Component Preview
+
+```svelte
+<ComponentView>
+  <Button>Click Me</Button>
+</ComponentView>
+```
+
+### With Background Grid
+
+```svelte
+<ComponentView isgrid={true}>
+  <Card title="Example Card">
+    <p>Card content goes here</p>
+  </Card>
+</ComponentView>
+```
+
+### With Centered Grid Pattern
+
+```svelte
+<ComponentView isgridCenter={true}>
+  <CircularProgress value={75} />
+</ComponentView>
+```
+
+### With Custom Styling
+
+```svelte
+<ComponentView class="min-h-[400px] bg-slate-900">
+  <GlowingButton>Neon Effect</GlowingButton>
+</ComponentView>
+```
+
+## Implementation Details
+
+The ComponentView component creates a standardized container with appropriate spacing, background, and positioning. It may use the GridPattern component from the Magic UI library for decorative backgrounds and provides a z-indexed container for the actual component.
+
+```svelte
+<script>
+  import { cn } from "$lib/utils";
+  import GridPattern from "$lib/magicui/backgrounds/GridPattern/GridPattern.svelte";
+  
+  export let class = "";
+  export let isgrid = false;
+  export let isgridCenter = false;
+</script>
+
+<div class={cn("component-view relative overflow-hidden rounded-lg border p-10", class)}>
+  {#if isgrid}
+    <GridPattern
+      width={14}
+      height={14}
+      x={-1}
+      y={-1}
+      fillColor="rgb(16, 16, 16)"
+      class={cn("[mask-image:linear-gradient(to_bottom_right,white,transparent,transparent)]")}
+    />
+  {:else if isgridCenter}
+    <GridPattern
+      width={25}
+      height={25}
+      strokeDashArray="2.21 2"
+      class={cn("[mask-image:radial-gradient(400px_circle_at_center,white,transparent)]")}
+    />
+  {/if}
+  
+  <div class="z-10 relative">
+    <slot />
+  </div>
+</div>
+```
+
+## Styling
+
+The ComponentView component typically includes these styling elements:
+
+- Container with border, border-radius, and appropriate padding
+- Optional decorative background patterns with masking effects
+- Proper z-indexing to ensure component visibility
+- Responsive sizing that adapts to content
+- Consistent spacing around the preview content
+- Subtle border to separate from surrounding content
+- Dark mode compatibility with appropriate color adjustments
+
+## Accessibility Considerations
+
+- Background patterns should not interfere with the readability of the component
+- Ensure sufficient contrast between the component and its background
+- The preview container should not introduce unnecessary keyboard focus traps
+- Interactive components within the view should remain fully accessible
+- Consider how screen readers will interpret the decorative elements
+
+## Best Practices
+
+1. **Consistent Usage** - Use ComponentView consistently for all component previews
+2. **Appropriate Spacing** - Allow sufficient space around components to showcase them properly
+3. **Background Selection** - Choose background patterns that complement rather than distract from the component
+4. **Interactive Components** - Ensure that components with interactive elements remain functional in the preview
+5. **Mobile Considerations** - Verify that previews remain effective at smaller viewport sizes
+6. **Context Appropriateness** - Match the background style to the component's typical usage context
+
+## Related Components
+
+- **CodeBlock** - Often paired with ComponentView to show both the preview and the code
+- **Tabs** - Frequently used to toggle between component preview and code view
+- **GridPattern** - Used internally to create decorative backgrounds
+- **Badge** - May be used alongside ComponentView to indicate component status
+- **Separator** - Often used to divide preview sections from other content
+
+## Browser Support
+
+The ComponentView component works across all modern browsers. The masking effects for grid patterns may have slight visual differences in older browsers, but the core functionality for displaying components is universally supported.

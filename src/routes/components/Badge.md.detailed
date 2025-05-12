@@ -1,0 +1,113 @@
+# Badge Component - Detailed Documentation
+
+## Overview
+
+The Badge component is a versatile UI element used to display short pieces of information, labels, or status indicators. Badges help highlight important metadata such as categories, counts, or states within the user interface.
+
+## API Reference
+
+### Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `variant` | `string` | `"default"` | Visual style variant of the badge. Options include: `default`, `outline`, `secondary`, `destructive` |
+| `class` | `string` | `""` | Additional CSS classes to apply to the badge element. These will be merged with the default styling. |
+
+### Slots
+
+| Slot | Description |
+|------|-------------|
+| default (unnamed) | Content to display inside the badge. Typically short text labels. |
+
+## Usage Examples
+
+### Basic Badge
+
+```svelte
+<Badge>Default</Badge>
+```
+
+### Badge Variants
+
+```svelte
+<Badge>Default</Badge>
+<Badge variant="outline">Outline</Badge>
+<Badge variant="secondary">Secondary</Badge>
+<Badge variant="destructive">Destructive</Badge>
+```
+
+### With Custom Styling
+
+```svelte
+<Badge class="py-1 px-3 text-sm">Custom Padding</Badge>
+<Badge class="bg-purple-500 text-white">Custom Colors</Badge>
+```
+
+### With Count or Status
+
+```svelte
+<Badge>New</Badge>
+<Badge variant="outline">5</Badge>
+<Badge variant="secondary">Active</Badge>
+```
+
+### In Context
+
+```svelte
+<div class="flex items-center gap-2">
+  <h3>Feature Title</h3>
+  <Badge variant="outline">Beta</Badge>
+</div>
+```
+
+## Implementation Details
+
+The Badge component is implemented as a simple span element with Tailwind CSS classes for styling. The component uses the `cn()` utility function to merge default styles with any custom classes provided through the `class` prop.
+
+```svelte
+<script>
+  export let variant = "default";
+  export let class = "";
+</script>
+
+<span class={`badge badge-${variant} ${class}`}>
+  <slot />
+</span>
+```
+
+## Styling
+
+The badge uses these base styles:
+
+- `badge`: Core badge styles (display, font size, padding, border radius)
+- `badge-default`: Default badge styling (background, text color)
+- `badge-outline`: Outline variant with border and transparent background
+- `badge-secondary`: Secondary styling with alternate colors
+- `badge-destructive`: Warning/error styling with appropriate colors
+
+These styles are typically implemented with Tailwind CSS classes or through a CSS/SCSS stylesheet.
+
+## Accessibility Considerations
+
+- Badges are purely visual elements and should not be the only way to convey important information
+- Use appropriate color contrast for different badge variants
+- Avoid using badges for critical functionality
+- For interactive badges, ensure proper focus states and keyboard accessibility
+
+## Best Practices
+
+1. **Keep content brief** - Badges should contain minimal text (1-2 words, or numbers)
+2. **Use consistently** - Apply badges consistently throughout your application
+3. **Choose appropriate variants** - Select variants that match the semantic meaning of the badge
+4. **Avoid overuse** - Too many badges can create visual noise and confusion
+
+## Related Components
+
+- **Pill** - Similar to Badge but with fully rounded corners
+- **Tag** - Like a badge but may include an icon or remove button
+- **Chip** - Interactive badge that can be selected or removed
+- **Status Indicator** - Specialized badge for showing system status
+
+## Browser Support
+
+The Badge component uses standard HTML and CSS features that are supported in all modern browsers.

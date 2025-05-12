@@ -1,0 +1,130 @@
+# CodeBlock Component - Detailed Documentation
+
+## Overview
+
+The CodeBlock component is a specialized UI element for displaying and formatting code snippets with syntax highlighting. It provides a consistent way to present code examples throughout the documentation with features like filename display, language-specific highlighting, and proper formatting.
+
+## API Reference
+
+### Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `code` | `string` | `""` | The source code string to be displayed and highlighted |
+| `lang` | `string` | `""` | Programming language identifier for syntax highlighting (e.g., "svelte", "js", "ts", "css") |
+| `fileName` | `string` | `""` | Optional filename to display above the code block |
+| `class` | `string` | `""` | Additional CSS classes to apply to the code block container |
+
+## Usage Examples
+
+### Basic Code Block
+
+```svelte
+<CodeBlock 
+  code="const greeting = 'Hello, world!';" 
+  lang="js" 
+/>
+```
+
+### With Filename
+
+```svelte
+<CodeBlock 
+  code="<h1>Hello World</h1>" 
+  lang="html" 
+  fileName="greeting.html" 
+/>
+```
+
+### Svelte Component Example
+
+```svelte
+<CodeBlock 
+  code={`<script>
+  let count = 0;
+  
+  function increment() {
+    count += 1;
+  }
+</script>
+
+<button on:click={increment}>
+  Clicked {count} {count === 1 ? 'time' : 'times'}
+</button>`} 
+  lang="svelte" 
+  fileName="Counter.svelte" 
+/>
+```
+
+### With Custom Styling
+
+```svelte
+<CodeBlock 
+  code="body { color: red; }" 
+  lang="css" 
+  fileName="styles.css" 
+  class="max-h-40 overflow-y-auto" 
+/>
+```
+
+## Implementation Details
+
+The CodeBlock component wraps code content in a pre/code structure and uses a syntax highlighting library (likely Shiki, PrismJS, or Highlight.js) to apply language-specific formatting. The component also manages a container for the filename display and proper spacing.
+
+```svelte
+<script>
+  export let code = "";
+  export let lang = "";
+  export let fileName = "";
+  export let class = "";
+  
+  // Internal implementation details would include syntax highlighting logic
+</script>
+
+<div class="code-block {class}">
+  {#if fileName}
+    <div class="file-name">{fileName}</div>
+  {/if}
+  <pre><code class={lang}>{code}</code></pre>
+</div>
+```
+
+## Styling
+
+The CodeBlock component typically includes these styling elements:
+
+- Container with border, border-radius, and background color
+- Filename bar with distinct background and padding
+- Properly formatted code with monospace font and line spacing
+- Language-specific syntax highlighting for keywords, strings, comments, etc.
+- Optional scrolling behavior for lengthy code samples
+- Dark mode support with appropriate color adjustments
+
+## Accessibility Considerations
+
+- Code blocks should maintain sufficient color contrast even with syntax highlighting
+- Long code snippets should be properly scrollable
+- Consider providing ways to copy code content to clipboard
+- Screen readers should announce the code block appropriately
+- Use semantic HTML elements for proper structure
+
+## Best Practices
+
+1. **Always specify a language** - This ensures proper syntax highlighting
+2. **Keep examples concise** - Focus on the relevant code rather than lengthy examples
+3. **Include filename when helpful** - Especially when showing multiple related files
+4. **Format code consistently** - Use consistent indentation and code style
+5. **Consider viewport constraints** - For mobile views, ensure code doesn't cause horizontal scrolling
+6. **Highlight important parts** - Consider emphasizing the most relevant sections in complex examples
+
+## Related Components
+
+- **InlineCode** - For short code references within paragraph text
+- **InteractiveExample** - CodeBlock with editable/runnable functionality
+- **DiffBlock** - For showing code changes with additions/deletions
+- **ComponentView** - For displaying live rendered components alongside their code
+- **Terminal** - For showing command-line instructions and outputs
+
+## Browser Support
+
+The CodeBlock component is compatible with all modern browsers. Syntax highlighting may vary slightly between browsers, but the core functionality works consistently across platforms.
