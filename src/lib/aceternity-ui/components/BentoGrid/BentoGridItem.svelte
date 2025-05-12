@@ -2,6 +2,22 @@
   import { cn } from "$lib/utils";
   import type { ComponentType } from "svelte";
 
+  /**
+   * @component
+   * BentoGridItem represents a single item within a `BentoGrid`.
+   * It provides slots for a header, icon, title, and description,
+   * allowing for flexible content presentation.
+   *
+   * @prop class - Optional CSS class to apply to the item container.
+   * @prop title - The title of the bento grid item. Can be a string or a Svelte component.
+   * @prop description - A brief description for the item. If empty, the 'description' slot can be used.
+   *
+   * @slot header - Slot for the header content of the item.
+   * @slot icon - Slot for an icon to be displayed within the item.
+   * @slot title - Slot for custom title component, used if `title` prop is not a string.
+   * @slot description - Slot for custom description component, used if `description` prop is empty.
+   */
+
   let _class = "";
   export { _class as class };
   export let title: string | ComponentType;

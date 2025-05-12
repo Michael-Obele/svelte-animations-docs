@@ -1,6 +1,14 @@
 <script>
   import { spring } from "svelte/motion";
 
+  /**
+   * @component
+   * A premium skeleton component for BentoGridItem, featuring an interactive animation
+   * of two message-like elements. On mouse enter, these elements shift and rotate,
+   * creating a playful effect. On mouse leave, they return to their initial positions.
+   * Uses svelte/motion `spring` for the animations.
+   */
+
   const one = {
     initial: {
       x: 0,

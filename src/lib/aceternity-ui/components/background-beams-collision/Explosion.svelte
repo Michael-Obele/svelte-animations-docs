@@ -1,7 +1,18 @@
-<script>
+<script lang="ts">
   import { Motion } from "svelte-motion";
-  export let style;
 
+  /**
+   * @component
+   * Explosion creates a visual explosion effect using multiple animated particles (spans)
+   * and a central gradient blur effect. It's typically triggered at a specific point
+   * (e.g., a collision point) and uses `svelte-motion` for its animations.
+   *
+   * @prop style - Inline CSS style string to position the explosion absolutely.
+   *               Example: "left: {x}px; top: {y}px; transform: translate(-50%, -50%);"
+   */
+  export let style: string;
+
+  // Defines the properties for each particle in the explosion
   let spans = Array.from({ length: 20 }, (_, index) => ({
     id: index,
     initialX: 0,

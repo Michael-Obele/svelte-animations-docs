@@ -1,3 +1,14 @@
+/**
+ * @file This file serves as the central registry for all Aceternity UI components.
+ * It imports component definitions (metadata, Svelte components, and raw code snippets)
+ * from individual component manifest files (e.g., `acetLens.ts`, `acetBentoGrid.ts`)
+ * and example files.
+ *
+ * The `allAceternityUI` array is the main export, providing a structured collection
+ * of `AceternityUI` objects. This array is likely consumed by documentation generation
+ * tools or UI showcases to display information about each component, including its
+ * preview, installation steps, and usage examples.
+ */
 import type { AceternityUI } from "./alltypes";
 
 // Lens Component

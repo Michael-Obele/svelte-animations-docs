@@ -1,3 +1,4 @@
+<!-- Basic usage example for BentoGrid and BentoGridItem, showcasing dynamic item rendering and spanning columns. -->
 <script>
   import BentoGrid from "../BentoGrid.svelte";
   import BentoGridItem from "../BentoGridItem.svelte";

@@ -1,4 +1,10 @@
 <script lang="ts">
+  /**
+   * @component
+   * ATExample demonstrates the usage of the `AnimatedTooltip` component.
+   * It defines an array of sample "people" data and passes it to the component
+   * to display a row of avatars with animated tooltips on hover.
+   */
   import AnimatedTooltip from "./AnimatedTooltip.svelte";
 
   const people = [

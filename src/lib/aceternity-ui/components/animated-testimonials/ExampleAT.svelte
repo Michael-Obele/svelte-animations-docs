@@ -1,6 +1,13 @@
 <script>
   import AnimatedTestimonials from "./AnimatedTestimonials.svelte";
 
+  /**
+   * @component
+   * ExampleAT demonstrates the usage of the `AnimatedTestimonials` component.
+   * It defines a sample array of testimonial data and passes it to the component.
+   * Autoplay is disabled in this example by default (as `autoplay` prop is not set).
+   */
+
   const testimonials = [
     {
       quote:

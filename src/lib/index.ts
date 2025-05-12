@@ -1,5 +1,16 @@
 // place files you want to import through the `$lib` alias in this folder.
-// Navbar
+
+/**
+ * @typedef {object} NavItem
+ * @property {string} name - The display name of the navigation link.
+ * @property {string} link - The URL path for the navigation link.
+ */
+
+/**
+ * An array of navigation link objects used for building the site's main navigation.
+ * Each object should conform to the NavItem type.
+ * @type {NavItem[]}
+ */
 export let navs = [
   {
     name: "Home",
@@ -29,6 +40,12 @@ export let navs = [
   },
 ];
 
+/**
+ * A string containing an example Tailwind CSS configuration.
+ * This configuration includes common animations and keyframes
+ * that are used or compatible with the components in this library.
+ * @type {string}
+ */
 export let tailwindCode = `// tailwind.config.js
 module.exports = {
   theme: {
@@ -155,6 +172,12 @@ module.exports = {
 };  // Module Exports
 `;
 
+/**
+ * A string containing the source code for the `cn` utility function.
+ * The `cn` function is used for conditionally joining CSS class names,
+ * integrating with Tailwind CSS and CLSX.
+ * @type {string}
+ */
 export let utilsCode = `
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";

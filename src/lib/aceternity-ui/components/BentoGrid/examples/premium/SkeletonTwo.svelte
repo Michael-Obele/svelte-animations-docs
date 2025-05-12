@@ -1,6 +1,14 @@
 <script>
   import { spring} from "svelte/motion";
 
+  /**
+   * @component
+   * A premium skeleton component for BentoGridItem, showcasing an animation where
+   * horizontal bars widen on mouse enter and revert on mouse leave.
+   * The width of each bar is randomized to create a dynamic effect.
+   * Uses svelte/motion `spring` for the animation.
+   */
+
   let initial = 0;
   let animate = 100;
   let variantOne = spring(initial, {

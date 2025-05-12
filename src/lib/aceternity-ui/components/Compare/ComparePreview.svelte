@@ -1,4 +1,9 @@
 <script>
+  /**
+   * @component
+   * ComparePreview demonstrates a basic usage of the `Compare` component,
+   * showcasing a comparison between Svelte 4 and Svelte 5 syntax images.
+   */
   import Svelte4Syntax from "$lib/svg/svelte4Syntax.png";
   import Svelte5Syntax from "$lib/svg/svelte5syntax.png";
   import Compare from "./Compare.svelte";

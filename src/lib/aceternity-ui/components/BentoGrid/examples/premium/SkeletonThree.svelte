@@ -2,6 +2,13 @@
   import { cubicOut } from "svelte/easing";
   import { tweened } from "svelte/motion";
 
+  /**
+   * @component
+   * A premium skeleton component for BentoGridItem, featuring a background that
+   * animates through a linear gradient of colors on mouse enter and resets on mouse leave.
+   * Uses svelte/motion `tweened` with `cubicOut` easing for the color transition.
+   */
+
   let colorChange = tweened(0, {
     duration: 2000,
     easing: cubicOut,

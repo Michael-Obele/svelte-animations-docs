@@ -1,3 +1,9 @@
+<!--
+@component
+A premium skeleton component for BentoGridItem, demonstrating an interactive 3D card stack effect.
+On mouse enter, two side cards animate to align with the central card. On mouse leave, they revert.
+Uses svelte/motion `spring` for the smooth card animations.
+-->
 <script>
   import { spring } from "svelte/motion";
 

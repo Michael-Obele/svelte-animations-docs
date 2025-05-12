@@ -2,6 +2,24 @@
   import { onMount } from "svelte";
   import { tweened } from "svelte/motion";
 
+  /**
+   * @component
+   * Compare is an interactive component that allows users to visually compare two images
+   * by sliding a handlebar or dragging across the images. It supports hover and drag
+   * interaction modes, autoplay functionality, and customization of appearance and behavior.
+   *
+   * @prop firstImage - URL or path to the first image for comparison (typically the "before" image).
+   * @prop secondImage - URL or path to the second image for comparison (typically the "after" image).
+   * @prop class - Optional CSS class to apply to the main container of the compare component.
+   * @prop firstImageClass - Optional CSS class for the container of the first image.
+   * @prop secondImageClass - Optional CSS class for the container of the second image.
+   * @prop initialSliderPercentage - The initial position of the slider, as a percentage (0-100). Default is 50.
+   * @prop slideMode - Interaction mode for the slider. Can be "hover" or "drag". Default is "hover".
+   * @prop showHandlebar - Whether to display the draggable handlebar. Default is true.
+   * @prop autoplay - If true, the slider will automatically animate back and forth. Default is false.
+   * @prop autoplayDuration - Duration in milliseconds for one cycle of autoplay (e.g., slide from left to right). Default is 5000ms.
+   */
+
   export let firstImage: string = "";
   export let secondImage: string = "";
   let className: string = "";
@@ -17,14 +35,18 @@
   let sliderXPercent = tweened(initialSliderPercentage, { duration: 0 });
   let isDragging = false;
   let isMouseOver = false;
-  let sliderRef;
-  let autoplayTimeout;
+  let sliderRef: HTMLDivElement | undefined; // Typed sliderRef
+  let autoplayTimeout: any; // Keep as any for setTimeout/clearTimeout
 
   const startAutoplay = () => {
-    if (!autoplay) return;
+    if (!autoplay || !sliderRef) return; // Ensure sliderRef exists
 
     const startTime = Date.now();
     const animate = () => {
+      if (!autoplay || !sliderRef) { // Check again in case autoplay was disabled during animation
+        stopAutoplay();
+        return;
+      }
       const elapsedTime = Date.now() - startTime;
       const progress =
         (elapsedTime % (autoplayDuration * 2)) / autoplayDuration;
@@ -45,7 +67,10 @@
   };
 
   onMount(() => {
-    startAutoplay();
+    // Ensure sliderRef is available before starting autoplay
+    if (sliderRef) {
+      startAutoplay();
+    }
     return stopAutoplay;
   });
 
@@ -62,22 +87,29 @@
     if (slideMode === "drag") {
       isDragging = false;
     }
-    startAutoplay();
+    if (autoplay && sliderRef && !isMouseOver) { // Restart autoplay if applicable
+        startAutoplay();
+    }
   }
 
-  function handleStart(clientX) {
+  function handleStart(clientX: number) { // Typed clientX
     if (slideMode === "drag") {
       isDragging = true;
     }
+    stopAutoplay(); // Stop autoplay on any manual interaction start
   }
 
   function handleEnd() {
     if (slideMode === "drag") {
       isDragging = false;
     }
+    // Restart autoplay only if autoplay prop is true, ref exists, and mouse is not currently over
+    if (autoplay && sliderRef && !isMouseOver) {
+        startAutoplay();
+    }
   }
 
-  function handleMove(clientX) {
+  function handleMove(clientX: number) { // Typed clientX
     if (!sliderRef) return;
 
     if (slideMode === "hover" || (slideMode === "drag" && isDragging)) {
@@ -88,7 +120,7 @@
     }
   }
 
-  function handleMouseDown(e) {
+  function handleMouseDown(e: MouseEvent) { // Typed event
     handleStart(e.clientX);
   }
 
@@ -96,25 +128,23 @@
     handleEnd();
   }
 
-  function handleMouseMove(e) {
+  function handleMouseMove(e: MouseEvent) { // Typed event
     handleMove(e.clientX);
   }
 
-  function handleTouchStart(e) {
-    if (!autoplay) {
-      handleStart(e.touches[0].clientX);
+  function handleTouchStart(e: TouchEvent) { // Typed event
+    if (e.touches[0]) { // Check if touches exist
+        handleStart(e.touches[0].clientX);
     }
   }
 
-  function handleTouchEnd() {
-    if (!autoplay) {
-      handleEnd();
-    }
+  function handleTouchEnd() { // No clientX needed for handleEnd
+    handleEnd();
   }
 
-  function handleTouchMove(e) {
-    if (!autoplay) {
-      handleMove(e.touches[0].clientX);
+  function handleTouchMove(e: TouchEvent) { // Typed event
+     if (e.touches[0]) { // Check if touches exist
+        handleMove(e.touches[0].clientX);
     }
   }
 </script>
@@ -124,7 +154,7 @@
   bind:this={sliderRef}
   class="w-[400px] h-[400px] overflow-hidden {className}"
   style="position: relative; cursor: {slideMode === 'drag'
-    ? 'grab'
+    ? isDragging ? 'grabbing': 'grab'
     : 'col-resize'};"
   on:mousemove={handleMouseMove}
   on:mouseleave={mouseLeaveHandler}

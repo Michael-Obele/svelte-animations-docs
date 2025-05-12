@@ -1,5 +1,12 @@
 <script>
   import Lens from "../Lens.svelte";
+
+  /**
+   * @component
+   * LensWholeComp demonstrates applying the `Lens` component to an entire card,
+   * including an image and text content. This shows how the lens effect can
+   * magnify a composite UI element.
+   */
   let hovering = false;
 </script>
 

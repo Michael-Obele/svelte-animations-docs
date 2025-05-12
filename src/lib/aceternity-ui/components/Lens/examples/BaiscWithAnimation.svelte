@@ -1,5 +1,12 @@
 <script>
   import Lens from "../Lens.svelte";
+
+  /**
+   * @component
+   * BaiscWithAnimation demonstrates the `Lens` component applied to an image
+   * within a card-like structure. It showcases how text content outside the
+   * lens can be blurred when the lens is active (hovering).
+   */
   let hovering = false;
 </script>
 

@@ -1,6 +1,13 @@
 <script>
   import { spring } from "svelte/motion";
 
+  /**
+   * @component
+   * A premium skeleton component for BentoGridItem, demonstrating interactive hover animations.
+   * Features talk bubble-like elements that shift and rotate on mouse enter/leave.
+   * Uses svelte/motion `spring` for smooth animations.
+   */
+
   const variants = {
     initial: {
       x: 0,

@@ -1,5 +1,11 @@
 <script>
   import DirectionHover from "./DirectionHover.svelte";
+
+  /**
+   * @component
+   * DirectionHoverPreview serves as a usage example for the `DirectionHover` component.
+   * It displays a sample image with overlay text that animates based on hover direction.
+   */
 </script>
 
 <div class="h-[28rem] relative flex items-center justify-center">

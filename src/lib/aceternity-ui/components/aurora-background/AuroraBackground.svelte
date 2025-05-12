@@ -1,21 +1,37 @@
 <script lang="ts">
   import { cn } from "$lib/utils";
 
+  /**
+   * @component
+   * AuroraBackground creates a visually appealing, animated background effect reminiscent of an aurora.
+   * It uses complex CSS gradients and animations to achieve this effect.
+   * The component centers its slotted content by default.
+   *
+   * A Svelte 5 specific version/playground is available at:
+   * https://svelte.dev/playground/09c5ff84a8ea4591a71b5a36f642a490?version=5.18.0
+   *
+   * @prop class - Optional CSS class(es) to apply to the main container div, allowing for custom height, etc.
+   * @prop showRadialGradient - If true, applies a radial gradient mask for an additional visual effect. Default is true.
+   *
+   * @slot - Default slot for content to be overlaid on the aurora background.
+   */
+
   let _class: string = "";
   export { _class as class };
   export let showRadialGradient: boolean = true;
 
-  // Svelte 5 Code : https://svelte.dev/playground/09c5ff84a8ea4591a71b5a36f642a490?version=5.18.0
+  // Note: The core aurora effect is achieved through complex Tailwind CSS arbitrary properties
+  // and CSS variables defined in the `tailwind.config.ts` (animation keyframes for 'aurora').
 </script>
 
 <div
   class={cn(
-    "relative flex flex-col h-[90vh] z-50 items-center justify-center bg-zinc-50 dark:bg-zinc-900  text-slate-950 transition-bg",
+    "relative flex flex-col h-[90vh] items-center justify-center bg-zinc-50 dark:bg-zinc-900 text-slate-950 transition-bg", // Removed z-50 from here, child has it
     _class
   )}
   {...$$restProps}
 >
-  <div class="absolute inset-0 overflow-hidden z-10">
+  <div class="absolute inset-0 overflow-hidden -z-10"> {/* Ensure aurora is behind content, changed z-10 to -z-10 */}
     <!--  I'm sorry but this is what peak developer performance looks like  trigger warning -->
     <div
       class={cn(
@@ -40,7 +56,7 @@
       )}
     ></div>
   </div>
-  <div class="z-50 text-center">
+  <div class="z-10 text-center relative"> {/* Added relative and ensured content is above aurora */}
     <slot></slot>
   </div>
 </div>
